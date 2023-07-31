@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import "./AutocompleteInput.css";
+import HighlightedText from "../../DataDisplay/HighlightedText/HighlightedText";
 
 type Suggestion = {
   id: number;
@@ -28,13 +28,13 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setInputValue(value); // update input value
+    setInputValue(value); // Update input value
   };
 
   const handleSelectSuggestion = (suggestion: Suggestion["id"]) => {
     const selectedSuggestion = suggestions.find((a) => a.id === suggestion);
     setInputValue(selectedSuggestion?.label || "");
-    setFilteredSuggestions([]);
+    setFilteredSuggestions([]); // CLear suggestions after selection
   };
 
   return (
@@ -48,10 +48,10 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
       <ul className="suggestions-list">
         {filteredSuggestions.map((suggestion, index) => (
           <li key={index} onClick={() => handleSelectSuggestion(suggestion.id)}>
-            {suggestion.label.replace(
-              new RegExp(`(${inputValue})`, "gi"),
-              (match) => `<span class="highlight">${match}</span>`
-            )}
+            <HighlightedText
+              text={suggestion.label}
+              searchString={inputValue}
+            />
           </li>
         ))}
       </ul>

@@ -1,6 +1,7 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import AutocompleteInput from "./components/Inputs/Autocomplete/AutocompleteInput";
 
 function App() {
   return (
@@ -19,6 +20,11 @@ function App() {
           Learn React
         </a>
       </header>
+
+      <AutocompleteInput
+        suggestions={[{ id: 1, label: "tei" }]}
+        onSearch={() => {}}
+      />
     </div>
   );
 }
