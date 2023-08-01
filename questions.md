@@ -26,9 +26,9 @@ Personally I use it to put together components and don't add an extra layer to t
 
 HOC components are components that receives other components and add some default logic between them. I can think in some examples:
 
-Using as an authentication component, to check if the user is logged and what logic should be applied to that user.
-Using as a layout wrapper, some pages might use the same header, so it can be wrapped in a HOC.
-Using as a styling wrapper, some pages uses the same styling, so it can be shared via HOC.
+1. Using as an authentication component, to check if the user is logged and what logic should be applied to that user.
+2. Using as a layout wrapper, some pages might use the same header, so it can be wrapped in a HOC.
+3. Using as a styling wrapper, some pages uses the same styling, so it can be shared via HOC.
 
 ## What's the difference in handling exceptions in promises, callbacks and async...await?
 
@@ -44,9 +44,9 @@ Change everything to use Hooks and create the component as a function and not a 
 
 ## List a few ways styles can be used with components.
 
-CSS modules, just import the css stylesheet inside of the component.
-Styled components, create dumb components to use only as styles.
-UI components libraries (MUI, AntD, Chakra).
+1. CSS modules, just import the css stylesheet inside of the component.
+2. Styled components, create dumb components to use only as styles.
+3. UI components libraries (MUI, AntD, Chakra).
 
 ## How to render an HTML string coming from the server.
 
