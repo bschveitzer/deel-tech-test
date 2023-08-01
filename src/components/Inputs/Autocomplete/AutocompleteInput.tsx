@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import HighlightedText from "../../DataDisplay/HighlightedText/HighlightedText";
+import "./AutocompleteInput.css";
 
 type Suggestion = {
   id: number;
@@ -17,6 +18,7 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState(suggestions);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   useEffect(() => {
     const delayTimer = setTimeout(() => {
@@ -35,6 +37,7 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
     const selectedSuggestion = suggestions.find((a) => a.id === suggestion);
     setInputValue(selectedSuggestion?.label || "");
     setFilteredSuggestions([]); // CLear suggestions after selection
+    setShowSuggestions(false);
   };
 
   return (
@@ -44,17 +47,23 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
         value={inputValue}
         onChange={handleInputChange}
         placeholder="Type to search..."
+        onFocus={() => setShowSuggestions(true)}
       />
-      <ul className="suggestions-list">
-        {filteredSuggestions.map((suggestion, index) => (
-          <li key={index} onClick={() => handleSelectSuggestion(suggestion.id)}>
-            <HighlightedText
-              text={suggestion.label}
-              searchString={inputValue}
-            />
-          </li>
-        ))}
-      </ul>
+      {showSuggestions && (
+        <ul className="suggestions-list">
+          {filteredSuggestions.map((suggestion, index) => (
+            <li
+              key={index}
+              onClick={() => handleSelectSuggestion(suggestion.id)}
+            >
+              <HighlightedText
+                text={suggestion.label}
+                searchString={inputValue}
+              />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
