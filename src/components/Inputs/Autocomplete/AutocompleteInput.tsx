@@ -1,13 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
+import { Suggestion } from "../../../types/types";
 import HighlightedText from "../../DataDisplay/HighlightedText/HighlightedText";
 import Loading from "../../Feedback/Loading/Loading";
 import "./AutocompleteInput.css";
-
-type Suggestion = {
-  id: number;
-  label: string;
-};
-
 interface AutocompleteInputProps {
   suggestions: Suggestion[];
   onSearch: (search: string) => void;
@@ -19,14 +14,13 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
   onSearch,
   isLoading,
 }) => {
-  const [inputValue, setInputValue] = useState("");
-  const [filteredSuggestions, setFilteredSuggestions] = useState(suggestions);
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [inputValue, setInputValue] = useState<string>("");
+  const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
 
   useEffect(() => {
     const delayTimer = setTimeout(() => {
       onSearch(inputValue);
-    }, 2000); // 2 seconds delay after typing to trigger the search function, in a real world scenario we can use some lodash debounce function
+    }, 1000); // 2 seconds delay after typing to trigger the search function, in a real world scenario we can use some lodash debounce function
 
     return () => clearTimeout(delayTimer);
   }, [inputValue, onSearch]);
@@ -39,7 +33,6 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
   const handleSelectSuggestion = (suggestion: Suggestion["id"]) => {
     const selectedSuggestion = suggestions.find((a) => a.id === suggestion);
     setInputValue(selectedSuggestion?.label || "");
-    setFilteredSuggestions([]); // CLear suggestions after selection
     setShowSuggestions(false);
   };
 
@@ -51,14 +44,14 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
         value={inputValue}
         onChange={handleInputChange}
         placeholder="Type to search..."
-        onFocus={() => setShowSuggestions(true)}
+        onClick={() => setShowSuggestions(true)}
       />
       {showSuggestions && (
         <ul className="suggestions-list">
           {isLoading ? (
             <Loading />
           ) : (
-            filteredSuggestions.map((suggestion, index) => (
+            suggestions.map((suggestion, index) => (
               <li
                 key={index}
                 onClick={() => handleSelectSuggestion(suggestion.id)}
