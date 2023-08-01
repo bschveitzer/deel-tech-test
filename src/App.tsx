@@ -17,7 +17,7 @@ function App() {
     setIsLoading(true);
 
     // Simulate API call for suggestions
-    // Replace this with your own API call logic
+    // Replace this with real world scenario useQuery hook, Apollo, axios call, etc.
     setTimeout(() => {
       const response = getFilteredSuggestions(searchString);
       setSearchItems(response);
