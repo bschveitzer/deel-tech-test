@@ -20,7 +20,7 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
   useEffect(() => {
     const delayTimer = setTimeout(() => {
       onSearch(inputValue);
-    }, 1000); // 2 seconds delay after typing to trigger the search function, in a real world scenario we can use some lodash debounce function
+    }, 1000); // 1 second delay after typing to trigger the search function, in a real world scenario we can use some lodash debounce function
 
     return () => clearTimeout(delayTimer);
   }, [inputValue, onSearch]);
