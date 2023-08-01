@@ -5,26 +5,35 @@
 
 input {
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
+  padding: 0.625rem;
+
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
 }
 
 .suggestions-list {
   position: absolute;
-  top: 100%;
   left: 0;
-  width: 100%;
-  background-color: var(--main-white);
-  border: 1px solid var(--border-color);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   list-style: none;
   padding: 0;
   margin: 0;
   max-height: 200px;
   overflow-y: auto;
+  font-size: 1rem;
+  z-index: 999;
+  border: 1px solid var(--border-color);
 }
 
 .suggestions-list li {
-  padding: 12px;
+  padding: 0.625rem;
   cursor: pointer;
-  text-align: start;
+  width: 300px;
+}
+
+.suggestions-list li:hover {
+  background-color: var(--light-gray);
 }

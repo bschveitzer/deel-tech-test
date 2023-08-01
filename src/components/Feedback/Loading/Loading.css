@@ -1,0 +1,22 @@
+.loading-container {
+  text-align: center;
+}
+.loading-logo {
+  height: 1.5rem;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .loading-logo {
+    animation: loading-logo-spin infinite 2s linear;
+  }
+}
+
+@keyframes loading-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

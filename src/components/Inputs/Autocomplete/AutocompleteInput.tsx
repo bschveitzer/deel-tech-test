@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import HighlightedText from "../../DataDisplay/HighlightedText/HighlightedText";
+import Loading from "../../Feedback/Loading/Loading";
 import "./AutocompleteInput.css";
 
 type Suggestion = {
@@ -10,11 +11,13 @@ type Suggestion = {
 interface AutocompleteInputProps {
   suggestions: Suggestion[];
   onSearch: (search: string) => void;
+  isLoading?: boolean;
 }
 
 const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
   suggestions,
   onSearch,
+  isLoading,
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState(suggestions);
@@ -43,6 +46,7 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
   return (
     <div className="autocomplete-container">
       <input
+        className="input-border"
         type="text"
         value={inputValue}
         onChange={handleInputChange}
@@ -51,17 +55,21 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({
       />
       {showSuggestions && (
         <ul className="suggestions-list">
-          {filteredSuggestions.map((suggestion, index) => (
-            <li
-              key={index}
-              onClick={() => handleSelectSuggestion(suggestion.id)}
-            >
-              <HighlightedText
-                text={suggestion.label}
-                searchString={inputValue}
-              />
-            </li>
-          ))}
+          {isLoading ? (
+            <Loading />
+          ) : (
+            filteredSuggestions.map((suggestion, index) => (
+              <li
+                key={index}
+                onClick={() => handleSelectSuggestion(suggestion.id)}
+              >
+                <HighlightedText
+                  text={suggestion.label}
+                  searchString={inputValue}
+                />
+              </li>
+            ))
+          )}
         </ul>
       )}
     </div>
