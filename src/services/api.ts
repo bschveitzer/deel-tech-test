@@ -19,7 +19,7 @@ export const mockData: Suggestion[] = [
   },
   {
     id: 5,
-    label: "Firth item",
+    label: "Fifth item",
   },
   {
     id: 6,
